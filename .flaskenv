@@ -1,2 +1,2 @@
-FLASK_APP=studentApp.py
+FLASK_APP=ZobProject.py
 FLASK_DEBUG=1

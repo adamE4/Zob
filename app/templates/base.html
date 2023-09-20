@@ -7,7 +7,7 @@
         <div class ="nav-container">
         <table>
             <tr>
-                <td><a href="{{ url_for('index') }}" class = "button">Home</a></td>
+                <td><a href="{{ url_for('index') }}" class = "button">Home</a> <a href="{{ url_for('T') }}" class = "button">Temp</a></td>
             </tr>
         </table>
         </div>
@@ -21,7 +21,6 @@
             {% endif %}
             {% endwith %}
 
-            {# application content needs to be provided in the content block #}
             {% block content %} {% endblock %}
         </div>
 

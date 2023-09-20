@@ -1,8 +1,6 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app,db
-
-from app.forms import ClassForm
-from app.models import Class
+from app.models import Temp
 
 @app.before_request
 def initDB(*args, **kwargs):
@@ -12,4 +10,11 @@ def initDB(*args, **kwargs):
 @app.route('/', methods=['GET'])
 @app.route('/index', methods=['GET'])
 def index():
-    return render_template('index.html', title="Course List")
+    users = Temp.query.all()
+    return render_template('index.html',temp=users)
+
+
+@app.route('/temp',methods=['GET'])
+def T():
+     users = Temp.query.all()
+     return render_template('temp.html',temp=users)
