@@ -12,7 +12,7 @@ with app.app_context():
     ob3 = Temp(name='Peter')
     db.session.add(ob3)
     
- 
+    print('hello')
     # Commit the changes to the database
     db.session.commit()
     
