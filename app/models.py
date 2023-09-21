@@ -1,5 +1,11 @@
 from app import db
+    
 
-class Temp(db.Model):
+class recipes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(10))  
+    title = db.Column(db.String(30))
+    description = db.Column(db.String(250))
+    ingredients = db.Column(db.String(100))
+    instructions = db.Column(db.String(100))
+    
+     

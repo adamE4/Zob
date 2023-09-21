@@ -1,6 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app,db
-from app.models import Temp
+from app.models import recipes
+from app.forms import postrecipes
 
 @app.before_request
 def initDB(*args, **kwargs):
@@ -10,11 +11,29 @@ def initDB(*args, **kwargs):
 @app.route('/', methods=['GET'])
 @app.route('/index', methods=['GET'])
 def index():
-    users = Temp.query.all()
-    return render_template('index.html',temp=users)
+    return render_template('index.html')
 
 
-@app.route('/temp',methods=['GET'])
-def T():
-     users = Temp.query.all()
-     return render_template('temp.html',temp=users)
+
+@app.route('/create_recipe', methods=['GET', 'POST'])
+def create_recipe():
+    cform = postrecipes()
+    
+    if cform.validate_on_submit():
+
+        new_recipe = recipes(
+            title=cform.title.data,
+            description=cform.description.data,
+            ingredients=cform.ingredients.data,
+            instructions=cform.instructions.data
+        )
+        
+
+        db.session.add(new_recipe)
+        db.session.commit()
+        
+
+        flash('Recipe created successfully', 'success')
+        return redirect('/index')
+    
+    return render_template('recipes.html', form=cform)
