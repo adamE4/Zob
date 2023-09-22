@@ -1,28 +1,31 @@
 <html>
-    <head>
-       <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    </head>
-
-    <body>
-        <div class ="nav-container">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <div class="nav-container">
         <table>
             <tr>
-                <td><a href="{{ url_for('index') }}" class = "button">Home</a> <a href="{{ url_for('create_recipe') }}" class = "button">Post Recipes</a></td>
+                <td>
+                    <a href="{{ url_for('index') }}" class="button">Home</a>
+                    <a href="{{ url_for('create_recipe') }}" class="button">Post Recipes</a>
+                    <!-- Add the Feed link here -->
+                    <a href="{{ url_for('recipe_feed') }}" class="button">Feed</a>
+                </td>
             </tr>
         </table>
-        </div>
+    </div>
 
-        <div>
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                <div>{{ message }}</div>
-                {% endfor %}
-            {% endif %}
-            {% endwith %}
+    <div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+            <div>{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
 
-            {% block content %} {% endblock %}
-        </div>
-
-    </body>
+        {% block content %} {% endblock %}
+    </div>
+</body>
 </html>

@@ -37,3 +37,9 @@ def create_recipe():
         return redirect('/index')
     
     return render_template('recipes.html', form=cform)
+
+@app.route('/recipe_feed')
+def recipe_feed():
+    recipe_list = recipes.query.all()  
+    return render_template('feed.html', recipes=recipe_list)
+

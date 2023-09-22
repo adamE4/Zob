@@ -1,0 +1,18 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Recipe Feed</h1>
+<div class="feed">
+    {% for recipe in recipes %}
+    <div class="feed-item">
+        <h3>{{ recipe.title }}</h3>
+        <h3>{{ recipe.description }}</h3>
+        <h3>{{ recipe.ingredients }}</h3>
+        <h3>{{ recipe.instructions }}</h3>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+
