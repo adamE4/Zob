@@ -1,7 +1,26 @@
-{% extends "base.html" %}
-
-
 {% block content %}
-    <h1>Program start</h1>
-
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<body>
+    <header>
+        <h1>Zob</h1>
+        <p>The All In One</p>
+    </header>
+    <main>
+        <div class="decision-buttons">
+            <a href="{{url_for('create_recipe')}}" class="button">Post Recipes</a>
+            <a href="{{url_for('recipe_feed')}}" class="button">Explore Existing Projects</a>
+        </div>
+    </main>
+</body>
+<div>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    {% for message in messages %}
+    <div>{{ message }}</div>
+    {% endfor %}
+{% endif %}
+{% endwith %}
+</div>
+</html>
+   
 {% endblock %}

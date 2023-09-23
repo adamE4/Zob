@@ -1,5 +1,6 @@
-{% extends "base.html" %}
+{% extends "index.html" %}
 {% block content %}
+<a href="{{ url_for('index') }}" class="homebutton">Home</a>
     <h1>Create Recipes</h1>
     {% if form %}
         <div class="row">
