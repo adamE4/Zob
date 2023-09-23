@@ -2,17 +2,41 @@
 {% extends "index.html" %}
 
 {% block content %}
-<a href="{{ url_for('index') }}" class="homebutton">Home</a>
-<div class="feed">
-    {% for recipe in recipes %}
-    <div class="feed-item">
-        <h3>{{ recipe.title }}</h3>
-        <h3>{{ recipe.description }}</h3>
-        <h3>{{ recipe.ingredients }}</h3>
-        <h3>{{ recipe.instructions }}</h3>
-    </div>
-    {% endfor %}
-</div>
+<body>
+    <header>
+        <h1>Recipes</h1>
+        <a href="{{ url_for('index') }}" class="homebutton">Home</a>
+        <a href="{{ url_for('create_recipe') }}" class="btn btn-primary">Create Recipe</a>
+    </header>
+    <main>
+        <div class="feed">
+            {% for recipe in recipes %}
+            <style>
+                .feed{
+                    width: 100%;
+                    height: auto;
+                }
+                .feed-item{
+                    width: 500px;
+                    height: 200px;
+                    background: black;
+                    color: white;
+                    text-align: center;
+                    border-radius: 20px;
+                }
+            </style>
+            <div class="feed-item">
+                <h3>{{ recipe.title }}</h3>
+                <p>{{ recipe.ingredients }}</p>
+                <p>{{ recipe.description }}</p>
+                <p>{{ recipe.instructions }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>
+
 {% endblock %}
 
 
