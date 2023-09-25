@@ -1,6 +1,4 @@
-
 {% extends "index.html" %}
-
 {% block content %}
 <body>
     <header>
@@ -30,6 +28,7 @@
                 <p>{{ recipe.ingredients }}</p>
                 <p>{{ recipe.description }}</p>
                 <p>{{ recipe.instructions }}</p>
+                <a href="{{ url_for('share', recipe_id=recipe.id) }}" class="button">Share</a>
             </div>
             {% endfor %}
         </div>

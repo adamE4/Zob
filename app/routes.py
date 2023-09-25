@@ -11,7 +11,7 @@ def initDB(*args, **kwargs):
 @app.route('/', methods=['GET'])
 @app.route('/index', methods=['GET'])
 def index():
-    return render_template('index.html')
+    return render_template('index.html',recipe=None)
 
 
 
@@ -42,4 +42,16 @@ def create_recipe():
 def recipe_feed():
     recipe_list = recipes.query.all()  
     return render_template('feed.html', recipes=recipe_list)
+
+@app.route('/view_recipe/<int:recipe_id>', methods=['GET'])
+def view_recipe(recipe_id):
+    recipe = recipes.query.get_or_404(recipe_id)
+    return render_template('view_recipe.html', recipe=recipe)
+
+@app.route('/share/<int:recipe_id>', methods=['GET'])
+def share(recipe_id):
+    recipe = recipes.query.get_or_404(recipe_id)
+    shareable_link = url_for('view_recipe', recipe_id=recipe.id, _external=True)
+    return render_template('share.html', shareable_link=shareable_link, recipe=recipe)
+
 

@@ -1,0 +1,16 @@
+
+<html>
+<head>
+    <!-- Your HTML head content here -->
+</head>
+<body>
+    <h1>Recipe Details</h1>
+    <p>Title: {{ recipe.title }}</p>
+    <p>Description: {{ recipe.description }}</p>
+    <p>Ingredients: {{ recipe.ingredients }}</p>
+    <p>Instructions: {{ recipe.instructions }}</p>
+
+
+    <a href="{{ url_for('index') }}" class="button">Back to Homepage</a>
+</body>
+</html>
