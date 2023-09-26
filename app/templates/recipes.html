@@ -1,6 +1,6 @@
 {% extends "index.html" %}
 {% block content %}
-<a href="{{ url_for('index') }}" class="homebutton">Home</a>
+<a href="{{ url_for('dashboard') }}" class="Dashboard">Dashboard</a>
 <a href="{{url_for('recipe_feed')}}" class="button">Your Recipes</a>
     <h1>Create Recipes</h1>
     {% if form %}

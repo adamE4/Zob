@@ -3,12 +3,12 @@
 <body>
     <header>
         <h1>Recipes</h1>
-        <a href="{{ url_for('index') }}" class="homebutton">Home</a>
+        <a href="{{ url_for('dashboard') }}" class="DashBoard">DashBoard</a>
         <a href="{{ url_for('create_recipe') }}" class="btn btn-primary">Create Recipe</a>
     </header>
     <main>
         <div class="feed">
-            {% for recipe in recipes %}
+            {% for recipe in user_recipes %}
             <style>
                 .feed{
                     width: 100%;

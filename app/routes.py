@@ -51,8 +51,8 @@ def create_recipe():
 
 @app.route('/recipe_feed')
 def recipe_feed():
-    recipe_list = recipes.query.all()  
-    return render_template('feed.html', recipes=recipe_list)
+    user_recipe = recipes.query.filter_by(user_id=current_user.id).all()  
+    return render_template('feed.html', user_recipes=user_recipe)
 
 @app.route('/view_recipe/<int:recipe_id>', methods=['GET'])
 def view_recipe(recipe_id):
@@ -98,3 +98,4 @@ def register():
         db.session.commit()
         return redirect(url_for('login'))
     return render_template('register.html',form=form)
+
