@@ -1,10 +1,11 @@
 {% extends "index.html" %}
+{% block content %}
 <html>
   <head>
-    <a href="{{ url_for('index') }}" class="homebutton">Home</a>
-    <a href="{{ url_for('create_recipe') }}" class="btn btn-primary">Create Recipe</a>
   </head>
   <body>
+    <a href="{{ url_for('index') }}" class="homebutton">Home</a>
+    <a href="{{ url_for('create_recipe') }}" class="btn btn-primary">Create Recipe</a>
     <h1>Recipe Sharing</h1>
     <p>Share this recipe:</p>
     <input type="text" value="{{ shareable_link }}" readonly />
@@ -14,6 +15,6 @@
     <p>Description: {{ recipe.description }}</p>
     <p>Ingredients: {{ recipe.ingredients }}</p>
     <p>Instructions: {{ recipe.instructions }}</p>
-
   </body>
 </html>
+{% endblock %}

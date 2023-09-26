@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
-from wtforms.validators import  ValidationError, Length
+from wtforms import StringField, SubmitField, PasswordField
+from wtforms.validators import  ValidationError, Length, InputRequired
+from app.models import User
 
 class postrecipes(FlaskForm):
     title = StringField('Title', validators=[Length(max=30)])
@@ -10,4 +11,25 @@ class postrecipes(FlaskForm):
     
     submit = SubmitField('Submit')
     
-
+class RegisterForm(FlaskForm):
+    username = StringField(validators=[InputRequired(),Length(
+       min=4,max=20)], render_kw={"placeholder": "Username"})
+    
+    password = PasswordField(validators=[InputRequired(),Length(
+        min=4, max=20)], render_kw={"placeholder": "Password"})
+    
+    submit = SubmitField("Register")
+    
+    def validate_username(self, username):
+      user = User.query.filter_by(username=username.data).first()
+      if user:
+        raise ValidationError("That username already exists. Please choose a different one.")
+         
+class LoginForm(FlaskForm):
+    username = StringField(validators=[InputRequired(),Length(
+       min=4,max=20)], render_kw={"placeholder": "Username"})
+    
+    password = PasswordField(validators=[InputRequired(),Length(
+        min=4, max=20)], render_kw={"placeholder": "Password"})
+    submit = SubmitField("Login")
+        

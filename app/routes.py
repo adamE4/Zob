@@ -1,7 +1,18 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app,db
-from app.models import recipes
+from app.models import recipes, User
 from app.forms import postrecipes
+from app.forms import LoginForm, RegisterForm
+from flask_bcrypt import Bcrypt
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import login_user, LoginManager, login_required, logout_user, current_user
+
+bcrypt = Bcrypt()
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "login"
 
 @app.before_request
 def initDB(*args, **kwargs):
@@ -54,4 +65,36 @@ def share(recipe_id):
     shareable_link = url_for('view_recipe', recipe_id=recipe.id, _external=True)
     return render_template('share.html', shareable_link=shareable_link, recipe=recipe)
 
+@login_manager.user_loader
+def load_user(user_id):
+    
+    # Query your database to retrieve the User object by user_id
+    return User.query.get(int(user_id))
 
+@app.route('/login', methods=['GET','POST'])
+def login():
+    form = LoginForm()
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user:
+            if bcrypt.check_password_hash(user.password, form.password.data):
+                login_user(user)
+                return redirect('dashboard')
+    return render_template('login.html', form=form)
+
+@app.route('/dashboard',methods=['GET','POST'])
+@login_required
+def dashboard():
+    return render_template('dashboard.html')
+
+@app.route('/register', methods=['GET','POST'])
+def register():
+    form = RegisterForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data)
+        new_user = User(username=form.username.data, password=hashed_password)
+        db.session.add(new_user)
+        db.session.commit()
+        return redirect(url_for('login'))
+    return render_template('register.html',form=form)
