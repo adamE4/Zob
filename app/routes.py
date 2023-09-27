@@ -67,8 +67,6 @@ def share(recipe_id):
 
 @login_manager.user_loader
 def load_user(user_id):
-    
-    # Query your database to retrieve the User object by user_id
     return User.query.get(int(user_id))
 
 @app.route('/login', methods=['GET','POST'])
