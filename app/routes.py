@@ -14,6 +14,8 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
 
+
+
 @app.before_request
 def initDB(*args, **kwargs):
     if app.got_first_request:
@@ -29,29 +31,28 @@ def index():
 @app.route('/create_recipe', methods=['GET', 'POST'])
 def create_recipe():
     cform = postrecipes()
-    
     if cform.validate_on_submit():
-
         new_recipe = recipes(
+            user_id = current_user.id,
             title=cform.title.data,
             description=cform.description.data,
             ingredients=cform.ingredients.data,
             instructions=cform.instructions.data
+            
         )
-        
-
+            
         db.session.add(new_recipe)
         db.session.commit()
         
 
         flash('Recipe created successfully', 'success')
-        return redirect('/index')
+        return redirect('dashboard')
     
     return render_template('recipes.html', form=cform)
 
 @app.route('/recipe_feed')
 def recipe_feed():
-    user_recipe = recipes.query.filter_by(user_id=current_user.id).all()  
+    user_recipe = recipes.query.filter_by(user_id=current_user.id).all()
     return render_template('feed.html', user_recipes=user_recipe)
 
 @app.route('/view_recipe/<int:recipe_id>', methods=['GET'])
