@@ -37,8 +37,7 @@ def create_recipe():
             title=cform.title.data,
             description=cform.description.data,
             ingredients=cform.ingredients.data,
-            instructions=cform.instructions.data
-            
+            instructions=cform.instructions.data  
         )
             
         db.session.add(new_recipe)
