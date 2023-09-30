@@ -1,8 +1,8 @@
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, Flask
 from app import app,db
 from app.models import recipes, User
-from app.forms import postrecipes
-from app.forms import LoginForm, RegisterForm
+from app.forms import postrecipes, RecipesearchForm
+from app.forms import LoginForm, RegisterForm, RecipesearchForm
 from flask_bcrypt import Bcrypt
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -49,10 +49,18 @@ def create_recipe():
     
     return render_template('recipes.html', form=cform)
 
-@app.route('/recipe_feed')
+@app.route('/recipe_feed',methods=['POST','GET'])
 def recipe_feed():
-    user_recipe = recipes.query.filter_by(user_id=current_user.id).all()
-    return render_template('feed.html', user_recipes=user_recipe)
+    form = RecipesearchForm()
+    user_recipe = None
+    if form.validate_on_submit():
+        
+        user_search = form.search.data
+        
+        user_recipe = recipes.query.filter(recipes.title.contains(user_search)).all()
+    else:
+        user_recipe = recipes.query.filter_by(user_id=current_user.id).all()
+    return render_template('feed.html',sform=form, user_recipes=user_recipe)
 
 @app.route('/view_recipe/<int:recipe_id>', methods=['GET'])
 def view_recipe(recipe_id):
@@ -97,3 +105,6 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html',form=form)
 
+
+
+       

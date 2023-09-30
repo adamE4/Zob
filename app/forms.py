@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField
+from wtforms import StringField, SubmitField, PasswordField, form, SelectField
 from wtforms.validators import  ValidationError, Length, InputRequired
 from app.models import User
 
@@ -33,3 +33,6 @@ class LoginForm(FlaskForm):
         min=4, max=20)], render_kw={"placeholder": "Password"})
     submit = SubmitField("Login")
         
+class RecipesearchForm(FlaskForm):
+    select = SubmitField('Search:')
+    search = StringField('Search for recipes')

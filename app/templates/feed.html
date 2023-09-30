@@ -5,6 +5,22 @@
         <h1>Recipes</h1>
         <a href="{{ url_for('dashboard') }}" class="DashBoard">DashBoard</a>
         <a href="{{ url_for('create_recipe') }}" class="btn btn-primary">Create Recipe</a>
+      <form action="{{ url_for('recipe_feed') }}" method="POST">
+    
+        {{ sform.hidden_tag() }}
+        {{ sform.select.title }}
+        {{ sform.search.title }}
+        {{ sform.select }}
+        {{ sform.search }}
+
+    
+    </form>
+  </div>
+</div>
+          </div>
+          <div>
+
+          </div>
     </header>
     <main>
         <div class="feed">
