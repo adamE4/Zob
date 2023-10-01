@@ -1,10 +1,19 @@
 
-<html>
-<head>
-    <!-- Your HTML head content here -->
-</head>
+{% block content%}
 <body>
-    <h1>Recipe Details</h1>
+    <div class="head">
+        <h1>Recipe Details</h1>
+        <style>
+            .head{
+                text-align: center;
+            }
+        </style>
+    <div class="details">
+        <style>
+            .details{
+                text-align: center;
+            }
+        </style>
     <p>Title: {{ recipe.title }}</p>
     <p>Description: {{ recipe.description }}</p>
     <p>Ingredients: {{ recipe.ingredients }}</p>
@@ -14,3 +23,4 @@
     <a href="{{ url_for('index') }}" class="button">Back to Homepage</a>
 </body>
 </html>
+{% endblock %}
