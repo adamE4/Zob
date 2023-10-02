@@ -106,5 +106,28 @@ def register():
     return render_template('register.html',form=form)
 
 
+@app.route('/recipe_feed/delete/<int:recipe_id>',methods=['GET','POST'])
+def delete(recipe_id):
+    form = RecipesearchForm()
+    to_delete = recipes.query.get_or_404(recipe_id)
+    try:
+        db.session.delete(to_delete)
+        db.session.commit()
+        
+        flash("Recipe was Deleted")
+     
+        user_recipe = recipes.query.filter_by(user_id=current_user.id).all()
+        return render_template('feed.html',sform=form, user_recipes=user_recipe)
+    except:
+        flash("There was a problem deleting recipe..")
+        user_recipe = recipes.query.filter_by(user_id=current_user.id).all()
+        return render_template('feed.html',sform=form, user_recipes=user_recipe)
+
+    
+
+
+    
+    
+
 
        

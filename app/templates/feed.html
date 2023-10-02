@@ -56,6 +56,8 @@
                 <p>{{ recipe.description }}</p>
                 <p>{{ recipe.instructions }}</p>
                 <a href="{{ url_for('share', recipe_id=recipe.id) }}" class="button">Share</a>
+                <a href="{{ url_for('delete', recipe_id=recipe.id) }}" class="button">Delete</a>
+
             </div>
             {% endfor %}
         </div>
