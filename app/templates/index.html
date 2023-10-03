@@ -2,39 +2,24 @@
 {% block content %}
 <body>
     <header>
-        <div class="header">
+        <div class="head">
         <h1>Zob</h1>
         <p>The All In One</p>
-        <style>
-            body{
-                margin: 20;
-            }
-            .header{
-                font-size: 75px;
-                text-align: center;
-            }
-           
-        </style>
+        <link rel="stylesheet" href="/static/style.css">
+
+        
     </header>
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     </head>
     <main>
-        <div class="decision-buttons">
-            <style>
-                .decision-buttons{
-                  text-align: center;
-                  margin: 4px 2px;
-                  font-size: 25;
-                  
-                }
-                
-                </style>
-            </style>
-            <a href="{{url_for('login')}}"class="decision-buttons">Login</a>
-            <a href="{{url_for('register')}}"class="decision-buttons">Register</a>
+        <div class="button-container">
+           
+            <a href="{{url_for('login')}}"class="button">Login</a>
+            <a href="{{url_for('register')}}"class="button">Register</a>
         </div>
     </main>
   </body>

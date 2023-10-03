@@ -4,25 +4,22 @@
   <head>
   </head>
   <body>
-    <div class="head">
-      <style>
-        .head{
-          text-align: center;
-        }
-      </style>
-    <a href="{{ url_for('dashboard') }}" class="Dashboard">Dashboard</a>
-    <a href="{{ url_for('create_recipe') }}" class="btn btn-primary">Create Recipe</a>
+    <link rel="stylesheet" href="/static/style.css">
+
+      <div class="button-container">
+
+    <a href="{{ url_for('dashboard') }}" class="button">Dashboard</a>
+    <a href="{{ url_for('create_recipe') }}" class="button">Create Recipe</a>
+    <div class="share-recipe-heading">
     <h1>Recipe Sharing</h1>
     <p>Share this recipe:</p>
-    <div class="share">
-      <style>
-    </style>
+    <div class="share-recipe-container">
     <p>Recipe details:</p>
     <p>Title: {{ recipe.title }}</p>
     <p>Description: {{ recipe.description }}</p>
     <p>Ingredients: {{ recipe.ingredients }}</p>
     <p>Instructions: {{ recipe.instructions }}</p>
-    <input type="text" value="{{ shareable_link }}" readonly />
+    <input type="text" class="shareable-link-input"value="{{ shareable_link }}" readonly />
   </body>
 </html>
 {% endblock %}

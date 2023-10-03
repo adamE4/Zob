@@ -56,8 +56,11 @@ def recipe_feed():
     if form.validate_on_submit():
         
         user_search = form.search.data
+        if user_search:
         
-        user_recipe = recipes.query.filter(recipes.title.contains(user_search)).all()
+            user_recipe = recipes.query.filter(recipes.title.contains(user_search)).all()
+        else:
+                    user_recipe = recipes.query.filter_by(user_id=current_user.id).all()
     else:
         user_recipe = recipes.query.filter_by(user_id=current_user.id).all()
     return render_template('feed.html',sform=form, user_recipes=user_recipe)
